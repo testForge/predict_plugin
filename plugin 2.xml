@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="mobi.parktag.sdk.plugin"
+        version="0.0.1">
+
+  <name>ParktagPlugin</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+  
+  <platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="ParktagPlugin">
+				<param name="ios-package" value="ParktagPlugin" />
+			</feature>
+		</config-file>
+		
+		<header-file src="Parktag.h" />
+		<header-file src="ParktagPlugin.h" />
+		<source-file src="ParktagPlugin.m" />
+		<source-file src="libParktagSDK.a" framework="true" />
+		
+		<framework src="CoreTelephony.framework" />
+		<framework src="CoreMotion.framework" />
+		<framework src="CoreLocation.framework" />
+		<framework src="CoreBluetooth.framework" />
+		<framework src="ExternalAccessory.framework" />
+		<framework src="CFNetwork.framework" />
+		<framework src="AVFoundation.framework" />
+		<framework src="SystemConfiguration.framework" />
+	</platform>
+</plugin>

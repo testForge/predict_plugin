@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="mobi.parktag.sdk.plugin"
+        version="0.0.1">
+
+  <name>ParkTAG</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="ParkTAG">
+        <param name="android-package" value="mobi.parktag.sdk.plugin.ParkTAG"/>
+      </feature>
+        <feature name="MyApp">
+        <param name="android-package" value="mobi.parktag.sdk.plugin.MyApp"/>
+      </feature>
+    </config-file>
+      
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+          <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+          <meta-data android:name="mobi.parktag.sdk.api.key" android:value="YOUR_API_KEY" />
+          <service android:exported="false" android:name="mobi.parktag.sdk.detection.services.ParktagCellManager" />
+          <service android:exported="false" android:name="mobi.parktag.sdk.detection.services.ParktagService" />
+          <service android:exported="false" android:name="mobi.parktag.sdk.detection.services.ParktagLocationManager" />
+          <service android:exported="false" android:name="mobi.parktag.sdk.detection.services.ParktagComService" />
+          <receiver android:name="mobi.parktag.sdk.detection.recievers.ParktagReceiver">
+            <intent-filter>
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="com.sonymobile.SUPER_STAMINA_SETTING_CHANGED" />
+            </intent-filter>
+        </receiver>
+      </config-file>
+      
+      <config-file target="AndroidManifest.xml" parent="/manifest">
+          <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+          <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+          <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+          <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+      </config-file>
+      
+    <source-file src="src/android/ParkTAG.java" target-dir="src/mobi/parktag/sdk/plugin/"/>
+    <source-file src="src/android/MyApp.java" target-dir="src/mobi/parktag/sdk/plugin/"/>
+    <source-file src="src/android/libs/parktagsdk_2015.6.7_a.15.27.jar" target-dir="libs" />
+      
+    <framework src="com.google.android.gms:play-services-location:6.5.87" />
+    <framework src="com.google.android.gms:play-services-maps:6.5.87" />
+    <framework src="com.google.android.gms:play-services-base:6.5.87" />
+  </platform>
+
+  <platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="ParktagPlugin">
+				<param name="ios-package" value="ParktagPlugin" />
+			</feature>
+		</config-file>
+		
+		<header-file src="Parktag.h" />
+		<header-file src="ParktagPlugin.h" />
+		<source-file src="ParktagPlugin.m" />
+		<source-file src="libParktagSDK.a" framework="true" />
+		
+		<framework src="CoreTelephony.framework" />
+		<framework src="CoreMotion.framework" />
+		<framework src="CoreLocation.framework" />
+		<framework src="CoreBluetooth.framework" />
+		<framework src="ExternalAccessory.framework" />
+		<framework src="CFNetwork.framework" />
+		<framework src="AVFoundation.framework" />
+		<framework src="SystemConfiguration.framework" />
+	</platform>
+</plugin>
