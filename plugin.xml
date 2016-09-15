@@ -19,7 +19,6 @@
         <param name="android-package" value="mobi.parktag.sdk.plugin.MyApp"/>
       </feature>
     </config-file>
-      
       <config-file target="AndroidManifest.xml" parent="/manifest/application">
           <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
           <meta-data android:name="mobi.parktag.sdk.api.key" android:value="YOUR_API_KEY" />
